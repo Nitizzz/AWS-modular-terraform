@@ -1,0 +1,3 @@
+# /stacks/staging/terraform.tfvars.example
+
+aws_ami_id = "ami-xxxxxxxxxxxxxxxxx" # Replace with a valid Amazon Linux 2 AMI for your region
