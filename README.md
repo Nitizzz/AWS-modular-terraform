@@ -1,9 +1,42 @@
-Terraform AWS Multi-Environment InfrastructureThis project demonstrates how to provision and manage a multi-environment infrastructure on AWS using Terraform. It follows Infrastructure as Code (IaC) best practices by using a modular architecture to create reusable components for networking and compute, which are then deployed into separate staging and production environments.🏛️ Architecture OverviewThe project is structured to separate reusable components from environment-specific configurations, promoting a clean and scalable design./modules: Contains reusable, generic Terraform configurations for individual AWS components./network/aws: A module to create a foundational network, including a VPC, public subnet, internet gateway, route table, and a security group./compute/aws: A module to launch an EC2 instance, complete with a user_data script to bootstrap a simple web server./stacks: Contains the deployable configurations for each environment. Each stack calls the necessary modules and provides environment-specific variables./staging: A configuration for a testing environment./production: A configuration for a production environment.This structure allows for consistent deployments across different environments while managing their configurations independently.⚙️ PrerequisitesBefore you begin, ensure you have the following tools installed and configured:Terraform CLI (v1.0.0+)AWS CLIAn AWS Account with an IAM user configured for programmatic access. Run aws configure to set up your credentials.A Git client for version control.🚀 Deployment InstructionsClone the Repositorygit clone https://github.com/your-username/terraform-aws-multi-env.git
+# Terraform AWS Multi-Environment Infrastructure
+
+This project demonstrates how to provision and manage a multi-environment infrastructure on AWS using **Terraform**.  
+It follows Infrastructure as Code (IaC) best practices by using a **modular architecture** to create reusable components for networking and compute, which are then deployed into separate **staging** and **production** environments.
+
+---
+
+## 🏛️ Architecture Overview
+
+The project is structured to separate reusable components from environment-specific configurations, promoting a clean and scalable design.
+
+- **/modules**: Contains reusable, generic Terraform configurations for individual AWS components.  
+  - **/network/aws**: A module to create a foundational network, including a VPC, public subnet, internet gateway, route table, and a security group.  
+  - **/compute/aws**: A module to launch an EC2 instance, complete with a `user_data` script to bootstrap a simple web server.  
+
+- **/stacks**: Contains the deployable configurations for each environment. Each stack calls the necessary modules and provides environment-specific variables.  
+  - **/staging**: A configuration for a testing environment.  
+  - **/production**: A configuration for a production environment.  
+
+This structure allows for **consistent deployments** across different environments while managing their configurations independently.
+
+---
+
+## ⚙️ Prerequisites
+
+Before you begin, ensure you have the following tools installed and configured:
+
+- Terraform CLI (**v1.0.0+**)  
+- AWS CLI  
+- An AWS Account with an IAM user configured for programmatic access.  
+  Run `aws configure` to set up your credentials.  
+- A Git client for version control.  
+
+---
+
+## 🚀 Deployment Instructions
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/your-username/terraform-aws-multi-env.git
 cd terraform-aws-multi-env
-Prepare Your ConfigurationNavigate to the environment you wish to deploy (e.g., staging):cd stacks/staging
-Create a terraform.tfvars file by copying the example template:cp terraform.tfvars.example terraform.tfvars
-Edit terraform.tfvars and replace the placeholder with a valid Amazon Linux 2 AMI ID for your desired AWS region.Initialize TerraformThis command downloads the necessary provider plugins and modules.terraform init
-Plan the DeploymentThis command creates an execution plan and shows you what resources will be created. It's a safe dry run.terraform plan
-Apply the ConfigurationThis command will build the infrastructure in your AWS account.terraform apply
-Type yes when prompted to confirm. After the apply is complete, the public IP of the web server will be displayed as an output.🧹 Cleanup InstructionsTo avoid ongoing costs, it is crucial to destroy the infrastructure when you are finished.Navigate to the stack directory you deployed (e.g., stacks/staging).Run the destroy command:terraform destroy
-Type yes when prompted to confirm the deletion of all resources.🧠 Key LearningsModular Design: How to create reusable Terraform modules to avoid code duplication.Environment Management: How to use stacks to manage separate staging and production environments from a single codebase.Dependency Management: How to connect modules by passing outputs from one module as inputs to another (e.g., connecting a compute instance to a network).Infrastructure as Code Lifecycle: The complete workflow of initializing, planning, applying, and destroying infrastructure.
+
